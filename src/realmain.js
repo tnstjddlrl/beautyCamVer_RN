@@ -22,6 +22,8 @@ import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import database from '@react-native-firebase/database';
+
 
 import { useNavigation } from '@react-navigation/native';
 import { buypname, darkmode, floor3rd, pid, plist, repcategory, repexp, repexpDate, repname, repNo } from '../atoms/atom';
@@ -172,8 +174,27 @@ const Realmain = () => {
     }
 
     useEffect(() => {
-
+        database().ref('/users/' + atid).on('value', snapshot => {
+            console.log('User data: ', snapshot.val());
+            if (snapshot.val() == null) {
+                database()
+                    .ref('/users/' + atid)
+                    .set('no')
+                    .then(() => {
+                        console.log('Data set.')
+                    });
+            } else if (snapshot.val() == 'yes') {
+                database()
+                    .ref('/users/' + atid)
+                    .set('no')
+                    .then(() => {
+                        console.log('Data set.')
+                    });
+                navigation.navigate('내부사진찍기')
+            }
+        });
     }, [])
+
 
     function darkbtn() {
         if (atdarkmode == 'light') {

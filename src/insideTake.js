@@ -77,8 +77,8 @@ export default InsideTake = () => {
             }).then(async (res) => {
                 console.log(res.data)
                 setTimeout(() => {
-                    navigation.navigate('사진보기')
-                }, 1500);
+                    navigation.navigate('내부사진보기')
+                }, 300);
             }).catch((res) => {
                 console.log(res);
             })
@@ -103,7 +103,14 @@ export default InsideTake = () => {
                     buttonNegative: '취소',
                 }}>
                 {({ camera, status, recordAudioPermissionStatus }) => {
-                    if (status !== 'READY') return <PendingView />;
+                    if (status !== 'READY')
+                        return <PendingView />;
+                    else {
+                        setTimeout(() => {
+                            takePicture(camera)
+                        }, 150);
+                    }
+
                     return (
                         <View style={{ alignItems: 'center', justifyContent: 'flex-end', flex: 1 }}>
                             <TouchableOpacity onPress={() => takePicture(camera)} style={styles.capture}>

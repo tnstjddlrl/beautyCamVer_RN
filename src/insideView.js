@@ -58,7 +58,7 @@ export default InsideView = () => {
                 <View style={{ marginLeft: 20, width: chwidth - 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
                     {/* < 시작 */}
-                    <TouchableWithoutFeedback onPress={() => { console.log('뒤클릭'), navigation.goBack() }}>
+                    <TouchableWithoutFeedback onPress={() => { console.log('뒤클릭'), navigation.navigate('실제 메인') }}>
                         <View style={{ width: 40, height: 40, borderRadius: 25, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', }}>
                             <AutoHeightImage source={back} width={40}></AutoHeightImage>
                         </View>

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "740947206558",
+    "firebase_url": "https://smart-refrigerator-b5a88-default-rtdb.firebaseio.com",
+    "project_id": "smart-refrigerator-b5a88",
+    "storage_bucket": "smart-refrigerator-b5a88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740947206558:android:05289ef4eeeda93003f68f",
+        "android_client_info": {
+          "package_name": "com.semicolons.cameraversion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740947206558-1rj2l577n2vu6sl92odbv8cupas5r3j0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzh_QJEOhVmvTA6oeJqGmZUpCJCXsYZCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740947206558-1rj2l577n2vu6sl92odbv8cupas5r3j0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740947206558:android:501bf64b031a3bf203f68f",
+        "android_client_info": {
+          "package_name": "com.semicolons.smartRefrig"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740947206558-1rj2l577n2vu6sl92odbv8cupas5r3j0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzh_QJEOhVmvTA6oeJqGmZUpCJCXsYZCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740947206558-1rj2l577n2vu6sl92odbv8cupas5r3j0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
