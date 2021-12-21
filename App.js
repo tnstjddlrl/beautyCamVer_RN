@@ -41,6 +41,7 @@ import ReviewWb from './wb/reviewWb';
 import SettingPage from './src/settingPage';
 import PwdChangePage from './src/pwdChangePage';
 import insideView from './src/insideView';
+import insideTake from './src/insideTake';
 
 const Stack = createStackNavigator();
 
@@ -71,6 +72,7 @@ export default APP = () => {
           <Stack.Screen name="설정" component={SettingPage} />
           <Stack.Screen name="비밀번호수정" component={PwdChangePage} />
           <Stack.Screen name="내부사진보기" component={insideView} />
+          <Stack.Screen name="내부사진찍기" component={insideTake} />
 
 
           <Stack.Screen name="사진보기" component={PictureCheck} />

@@ -1,4 +1,4 @@
-package com.camera;
+package com.semicolons.cameraversion;
 
 import com.facebook.react.ReactActivity;
 

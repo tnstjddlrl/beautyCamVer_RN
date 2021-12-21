@@ -37,7 +37,6 @@ var day = now.getDate();        // 일
 
 var endDate = new Date(year, month, day);
 
-
 const tuto = require('../img/light/tuto.png');
 const text1 = require('../img/light/menu1_2.png')
 const img1 = require('../img/light/menu1.png')
@@ -69,7 +68,6 @@ const d_del = require('../img/dark/d_del.png');
 const d_menu2_2 = require('../img/dark/d_menu2_2.png');
 
 const icon3 = require('../img/light/icon3.png');
-
 ////////////////////////////////////////////////////////
 //새로운 아이콘들/ 위의 아이콘들은 순차적으로 폐기 예정
 //////////////////////////////////////////////////////////
@@ -104,11 +102,11 @@ const light_delete = require('../newimg/light/delete.png')
 
 const newlogo = require('../newimg/asd.png')
 const newlogo_light = require('../newimg/asdf.png')
-
+const camera_icon = require('../img/camera.png')
+const camera_white_icon = require('../img/camera_white.png')
 
 
 ///////////////////////////////////////////////////////
-
 const storeDate = async (value) => {
     try {
         await AsyncStorage.setItem('@date_first', value)
@@ -754,6 +752,13 @@ const Realmain = () => {
                     <AutoHeightImage source={atdarkmode === 'light' ? newlogo_light : newlogo} width={120}></AutoHeightImage>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                        <TouchableWithoutFeedback onPress={() => { navigation.navigate('내부사진찍기') }}>
+                            <View style={{ borderWidth: 1, borderColor: atdarkmode === 'light' ? 'rgb(204,204,204)' : 'rgb(46,46,46)', borderRadius: 20, marginRight: 5, backgroundColor: atdarkmode === 'light' ? 'white' : 'rgb(46,46,46)' }}>
+                                <AutoHeightImage source={atdarkmode === 'light' ? camera_icon : camera_white_icon} width={14} style={{ margin: 8 }}></AutoHeightImage>
+                            </View>
+                        </TouchableWithoutFeedback>
+
                         {version ?
                             <TouchableWithoutFeedback onPress={() => {
                                 if (version)
@@ -967,13 +972,13 @@ const Realmain = () => {
             {/* 본문 끝 */}
 
             {/* 하단 등록 버튼 시작 */}
-            <View style={{ width: chwidth, alignItems: 'center', justifyContent: 'center', marginBottom: 10, opacity: 1 }}>
+            {/* <View style={{ width: chwidth, alignItems: 'center', justifyContent: 'center', marginBottom: 10, opacity: 1 }}>
                 <TouchableWithoutFeedback onPress={() => { navigation.navigate('바코드체크') }}>
                     <View style={{ width: chwidth - 40, height: 55, marginLeft: 0, borderWidth: 1.5, borderColor: atdarkmode === 'light' ? 'rgb(28,47,121)' : '#f2f2f2', borderRadius: 8, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: atdarkmode === 'light' ? 'rgb(28,47,121)' : '#f2f2f2', fontSize: 20, fontWeight: 'bold' }}>등록하기</Text>
                     </View>
                 </TouchableWithoutFeedback>
-            </View>
+            </View> */}
 
 
             {/* 하단 등록 버튼 끝 */}

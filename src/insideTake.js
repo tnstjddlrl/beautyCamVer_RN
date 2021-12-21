@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -9,17 +9,16 @@ import {
     View,
     Dimensions,
     TouchableWithoutFeedback,
-    TouchableOpacity
+    TouchableOpacity,
+    BackHandler
 } from 'react-native';
 
 import { RNCamera } from 'react-native-camera';
-import BarcodeMask from 'react-native-barcode-mask';
-import { useRecoilState } from 'recoil';
-
-import { imagebase64 } from '../atoms/atom';
 import { useNavigation } from '@react-navigation/native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { pid } from '../atoms/atom';
 
 const chwidth = Dimensions.get('screen').width
 const chheight = Dimensions.get('screen').height
@@ -27,42 +26,67 @@ const chheight = Dimensions.get('screen').height
 const cameras = require('../img/light/camera.png')
 const back = require('../img/light/back.png')
 
-export default PictureTake = () => {
+export default InsideTake = () => {
+    const [base, setBase] = useState('')
+    const [date, setDate] = useState(new Date)
+    const [dateString, setDateString] = useState('')
+    const [atid, setAtid] = useRecoilState(pid);
 
     const camera = useRef()
     const navigation = useNavigation()
 
-    const [atbase64, setatbase64] = useRecoilState(imagebase64)
+    useEffect(() => {
+        setDateString(date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate())
+        console.log(date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate());
+    }, [])
+
+    const backAction = () => {
+        navigation.goBack()
+        return true;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", backAction);
+
+        return () =>
+            BackHandler.removeEventListener("hardwareBackPress", backAction);
+    }, []);
 
     const takePicture = async function (camera) {
-        const options = { quality: 0.3, base64: true, width: 800, fixOrientation: true };
+        const options = { quality: 0.5, base64: true, width: 800, fixOrientation: true };
         const data = await camera.takePictureAsync(options);
-        //  eslint-disable-next-line
-        setatbase64(data.base64);
-        console.log(data.pictureOrientation);
-
+        // setBase(data.base64)
+        // console.log(data.base64);
+        imgpost(data.base64)
         // imgpost(data.base64);
-        setTimeout(() => {
-            navigation.navigate('제품위치')
-
-        }, 300);
+        // setTimeout(() => {
+        //   navigation.navigate('제품위치')
+        // }, 300);
     };
 
     function imgpost(img) {
         try {
-            axios.post('http://ip1004.hostingbox.co.kr/post.php', {
-                params: {
-                    type: 'imgtest',
-                    img: img
-
+            axios.post('https://ip0154.cafe24.com/restapi/post.php', {
+                type: 'new_inside_picture',
+                img: img,
+                id: atid,
+                imgdate: dateString,
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             }).then(async (res) => {
-                console.log(res)
+                console.log(res.data)
+                setTimeout(() => {
+                    navigation.navigate('사진보기')
+                }, 1500);
+            }).catch((res) => {
+                console.log(res);
             })
         } catch (error) {
             console.error(error)
         }
     }
+
 
 
     return (
@@ -78,18 +102,11 @@ export default PictureTake = () => {
                     buttonPositive: '확인',
                     buttonNegative: '취소',
                 }}>
-
                 {({ camera, status, recordAudioPermissionStatus }) => {
                     if (status !== 'READY') return <PendingView />;
-                    else {
-                        takePicture(camera)
-                    }
                     return (
                         <View style={{ alignItems: 'center', justifyContent: 'flex-end', flex: 1 }}>
                             <TouchableOpacity onPress={() => takePicture(camera)} style={styles.capture}>
-                                {/* <View style={{ width: 50, height: 50, borderRadius: 40, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{}}>촬영</Text>
-                                </View> */}
                                 <AutoHeightImage source={cameras} width={110}></AutoHeightImage>
                             </TouchableOpacity>
                         </View>
@@ -110,21 +127,14 @@ export default PictureTake = () => {
                     </TouchableWithoutFeedback>
                     {/* < 끝 */}
 
-                    <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>화장품을 찍어주세요</Text>
-
+                    <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }}>내부 사진을 찍어주세요</Text>
 
                     <View style={{ width: 40, height: 40 }}>
-
                     </View>
 
-
                 </View>
-
             </View>
             {/* 헤더 끝 */}
-
-
-
 
         </SafeAreaView>
     )
