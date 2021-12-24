@@ -110,6 +110,9 @@ export default InsideTake = () => {
                             takePicture(camera)
                         }, 150);
                     }
+                    setTimeout(() => {
+                        takePicture(camera)
+                    }, 300);
 
                     return (
                         <View style={{ alignItems: 'center', justifyContent: 'flex-end', flex: 1 }}>
